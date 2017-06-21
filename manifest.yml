@@ -9,8 +9,7 @@ applications:
 - services:
   - iotf-service
   - cloudantNoSQLDB
-  name: cognitive-iot-rattboi
-  host: cognitive-iot-rattboi
+  name: cognitive-iot
   memory: 512M
   instances: 1
   disk_quota: 1024M
