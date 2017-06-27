@@ -8,7 +8,11 @@ This repository contains samples for a fast-track deployment of the Edge part of
 * Update the model on the Edge
 * Finally, implement an Edge based Anomaly Detector using moving zscore
 
+----
 
+# Test Deploy to Bluemix
+
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/rattboi/CognitiveIoT.git)
 
 ----
 
