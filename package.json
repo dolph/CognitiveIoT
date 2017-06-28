@@ -1,7 +1,7 @@
 {
-  "name": "elevator-simulator",
+  "name": "cognitive-iot-demo",
   "version": "0.1.0",
-  "description": "An Elevator Simulator, that helps simulate Elevator operations, all using Node-RED nodes",
+  "description": "A demo showing how to use IBM's IoT platform, all using Node-RED nodes",
   "engines": {
     "node": ">=0.12.x"
   },
@@ -11,7 +11,9 @@
       "name": "Sathiskumar Palaniappan",
       "email": "sathipal@in.ibm.com",
       "name": "Prasanna A Mathada",
-      "email": "amprasanna@in.ibm.com"
+      "email": "amprasanna@in.ibm.com",
+      "name": "Bradon Kanyid",
+      "email": "bradon.kanyid@ibm.com"
     }
   ],
   "license": "EPL-1.0",
