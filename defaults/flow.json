@@ -1,1 +1,389 @@
-[{"id":"717202d1.7772bc","type":"ibmiot out","z":"2d4d0dfd.fd675a","authentication":"boundService","apiKey":"d5180ceb.c580c","outputType":"evt","deviceId":"Washer01","deviceType":"WashingMachine","eventCommandType":"status","format":"json","data":"msg.payload","qos":"","name":"Washer01","service":"registered","x":836,"y":193.183349609375,"wires":[]},{"id":"9b980166.c348d","type":"inject","z":"2d4d0dfd.fd675a","name":"Voltage Sensor Simulator","topic":"","payload":"{ \"d\": { \"voltage\": 240, \"frequency\": 50 } }","payloadType":"json","repeat":"0.3","crontab":"","once":false,"x":177.66668701171875,"y":194.10000610351562,"wires":[["3f637e32.2769c2"]]},{"id":"3f637e32.2769c2","type":"function","z":"2d4d0dfd.fd675a","name":"Voltage data","func":"// initialise the counter to 0 if it doesn't exist already\nvar count = context.get('count')||0;\ncount += 1;\n// store the value back\ncontext.set('count',count);\n// make it part of the outgoing msg object\nmsg.payload.d.count = count;\nif(count % 100 <= 90) {\n    msg.payload.d.voltage = Math.floor(Math.random() * (240 - 220) + 220);\n} else {\n    msg.payload.d.voltage = Math.floor(Math.random() * (260 - 240) + 240);\n}\nmsg.payload.d.frequency = Math.floor(Math.random() * (80 - 60 + 1) + 60);\n//msg.payload = JSON.stringify(msg.payload)\nmsg.eventOrCommandType = \"voltage\"\nreturn msg;","outputs":1,"noerr":0,"x":412.550048828125,"y":194.98333740234375,"wires":[["39005308.30d6cc","a39f6a9c.0f16a","1abae046.e26328"]]},{"id":"39005308.30d6cc","type":"function","z":"2d4d0dfd.fd675a","name":"add timestamp","func":"msg.payload.d.ts = new Date().getTime();\nreturn msg;","outputs":1,"noerr":0,"x":642.5,"y":193.23333740234375,"wires":[["717202d1.7772bc"]]},{"id":"a39f6a9c.0f16a","type":"function","z":"2d4d0dfd.fd675a","name":"zscore","func":"var aggwindow = context.get('aggwindow')||[];\n\naggwindow.push(msg.payload.d.voltage); \n\nif (aggwindow.length> 30) {\n    sum = aggwindow.reduce((a,b)=>a+b,0);\n    n = aggwindow.length;\n    mean = sum/n;\n    sd = Math.sqrt(aggwindow.map(x=>Math.pow(mean-x,2)).reduce((a,b)=>a+b,0));\n    aggwindow.shift();\n    msg.zscore = (mean-msg.payload.d.voltage)/(sd+0.0001)\n}\ncontext.set('aggwindow',aggwindow);\n\nvar min = context.get('min')||300;\nvar max = context.get('max')||0;\n\ncontext.set('min',Math.min(min,msg.payload.d.voltage));\ncontext.set('max',Math.max(max,msg.payload.d.voltage));\n\nmsg.payload=msg.payload.d.voltage+\":\"+msg.zscore+\":\"+min+\":\"+max;\n\n\nreturn msg;","outputs":1,"noerr":0,"x":201,"y":376,"wires":[["e83a92ea.4f1b58","f3d3cc26.b7fa1"]]},{"id":"e83a92ea.4f1b58","type":"function","z":"2d4d0dfd.fd675a","name":"alert on threshold","func":"if (Math.abs(msg.zscore)>0.5) {\n    msg.payload=\"ALERT ALERT ALERT!!!!!\";\n    return msg;\n}\n","outputs":1,"noerr":0,"x":466,"y":373,"wires":[["40acda13.1ede94","542a2824.8f2668"]]},{"id":"f0ad34f5.7e68","type":"ui_chart","z":"2d4d0dfd.fd675a","name":"","group":"9f1f2a10.5552f","order":0,"width":0,"height":0,"label":"voltage","chartType":"line","legend":"false","xformat":"HH:mm:ss","interpolate":"linear","nodata":"","ymin":"200","ymax":"300","removeOlder":1,"removeOlderPoints":"","removeOlderUnit":"60","cutout":0,"colors":["#1f77b4","#aec7e8","#ff7f0e","#2ca02c","#98df8a","#d62728","#ff9896","#9467bd","#c5b0d5"],"x":836.5,"y":60.5,"wires":[[],[]]},{"id":"1abae046.e26328","type":"function","z":"2d4d0dfd.fd675a","name":"Prepare for Visualization","func":"msg.payload=msg.payload.d.voltage;\nreturn msg;","outputs":1,"noerr":0,"x":627.5,"y":59.75,"wires":[["f0ad34f5.7e68"]]},{"id":"5bce45d0.3ce62c","type":"ui_chart","z":"2d4d0dfd.fd675a","name":"","group":"9f1f2a10.5552f","order":0,"width":0,"height":0,"label":"zscore","chartType":"line","legend":"false","xformat":"HH:mm:ss","interpolate":"linear","nodata":"","ymin":"","ymax":"","removeOlder":1,"removeOlderPoints":"","removeOlderUnit":"60","cutout":0,"colors":["#1f77b4","#aec7e8","#ff7f0e","#2ca02c","#98df8a","#d62728","#ff9896","#9467bd","#c5b0d5"],"x":839.5,"y":312.5,"wires":[[],[]]},{"id":"f3d3cc26.b7fa1","type":"function","z":"2d4d0dfd.fd675a","name":"Prepare for Visualization","func":"msg.payload=msg.zscore;\nreturn msg;","outputs":1,"noerr":0,"x":487,"y":313,"wires":[["5bce45d0.3ce62c"]]},{"id":"542a2824.8f2668","type":"ui_text_input","z":"2d4d0dfd.fd675a","name":"","label":"Alert Status","group":"9f1f2a10.5552f","order":0,"width":0,"height":0,"passthru":true,"mode":"text","delay":300,"topic":"","x":817.5,"y":374.5,"wires":[[]]},{"id":"eb881224.dc73","type":"delay","z":"2d4d0dfd.fd675a","name":"","pauseType":"delay","timeout":"5","timeoutUnits":"seconds","rate":"1","nbRateUnits":"1","rateUnits":"second","randomFirst":"1","randomLast":"5","randomUnits":"seconds","drop":false,"x":653.5,"y":507.75,"wires":[["542a2824.8f2668"]]},{"id":"40acda13.1ede94","type":"function","z":"2d4d0dfd.fd675a","name":"reset message","func":"msg.payload = \"\";\nreturn msg;","outputs":1,"noerr":0,"x":446.5,"y":507.75,"wires":[["eb881224.dc73"]]},{"id":"d5180ceb.c580c","type":"ibmiot","z":"bb6cd730.7f7dc8","name":"coi0nz"},{"id":"9f1f2a10.5552f","type":"ui_group","z":"","name":"Anomaly Dashboard","tab":"8618be9a.b02898","disp":true,"width":"6"},{"id":"8618be9a.b02898","type":"ui_tab","z":"","name":"Voltage","icon":"dashboard"}]
+[
+    {
+        "id": "c799ff67.bd4e4",
+        "type": "tab",
+        "label": "Flow 1"
+    },
+    {
+        "id": "d5180ceb.c580c",
+        "type": "ibmiot",
+        "z": "bb6cd730.7f7dc8",
+        "name": "coi0nz"
+    },
+    {
+        "id": "9f1f2a10.5552f",
+        "type": "ui_group",
+        "z": "",
+        "name": "Anomaly Dashboard",
+        "tab": "8618be9a.b02898",
+        "disp": true,
+        "width": "6"
+    },
+    {
+        "id": "8618be9a.b02898",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Voltage",
+        "icon": "dashboard"
+    },
+    {
+        "id": "532dd939.6af4a8",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "Helvetica Neue",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "Helvetica Neue",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "Helvetica Neue"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                }
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "717202d1.7772bc",
+        "type": "ibmiot out",
+        "z": "c799ff67.bd4e4",
+        "authentication": "boundService",
+        "apiKey": "",
+        "outputType": "evt",
+        "deviceId": "VoltageSensor01",
+        "deviceType": "RemoteDevice",
+        "eventCommandType": "status",
+        "format": "json",
+        "data": "msg.payload",
+        "qos": "",
+        "name": "VoltageSensor01",
+        "service": "registered",
+        "x": 866,
+        "y": 193.183349609375,
+        "wires": []
+    },
+    {
+        "id": "9b980166.c348d",
+        "type": "inject",
+        "z": "c799ff67.bd4e4",
+        "name": "Voltage Sensor Simulator",
+        "topic": "",
+        "payload": "{ \"d\": { \"voltage\": 240, \"frequency\": 50 } }",
+        "payloadType": "json",
+        "repeat": "0.3",
+        "crontab": "",
+        "once": false,
+        "x": 177.66668701171875,
+        "y": 194.10000610351562,
+        "wires": [
+            [
+                "3f637e32.2769c2"
+            ]
+        ]
+    },
+    {
+        "id": "3f637e32.2769c2",
+        "type": "function",
+        "z": "c799ff67.bd4e4",
+        "name": "Voltage data",
+        "func": "// initialise the counter to 0 if it doesn't exist already\nvar count = context.get('count')||0;\ncount += 1;\n// store the value back\ncontext.set('count',count);\n// make it part of the outgoing msg object\nmsg.payload.d.count = count;\nif(count % 100 <= 90) {\n    msg.payload.d.voltage = Math.floor(Math.random() * (240 - 220) + 220);\n} else {\n    msg.payload.d.voltage = Math.floor(Math.random() * (260 - 240) + 240);\n}\nmsg.payload.d.frequency = Math.floor(Math.random() * (80 - 60 + 1) + 60);\n//msg.payload = JSON.stringify(msg.payload)\nmsg.eventOrCommandType = \"voltage\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 412.550048828125,
+        "y": 194.98333740234375,
+        "wires": [
+            [
+                "39005308.30d6cc",
+                "a39f6a9c.0f16a",
+                "1abae046.e26328"
+            ]
+        ]
+    },
+    {
+        "id": "39005308.30d6cc",
+        "type": "function",
+        "z": "c799ff67.bd4e4",
+        "name": "add timestamp",
+        "func": "msg.payload.d.ts = new Date().getTime();\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 642.5,
+        "y": 193.23333740234375,
+        "wires": [
+            [
+                "717202d1.7772bc"
+            ]
+        ]
+    },
+    {
+        "id": "a39f6a9c.0f16a",
+        "type": "function",
+        "z": "c799ff67.bd4e4",
+        "name": "zscore",
+        "func": "var aggwindow = context.get('aggwindow')||[];\n\naggwindow.push(msg.payload.d.voltage); \n\nif (aggwindow.length> 30) {\n    sum = aggwindow.reduce((a,b)=>a+b,0);\n    n = aggwindow.length;\n    mean = sum/n;\n    sd = Math.sqrt(aggwindow.map(x=>Math.pow(mean-x,2)).reduce((a,b)=>a+b,0));\n    aggwindow.shift();\n    msg.zscore = (mean-msg.payload.d.voltage)/(sd+0.0001)\n}\ncontext.set('aggwindow',aggwindow);\n\nvar min = context.get('min')||300;\nvar max = context.get('max')||0;\n\ncontext.set('min',Math.min(min,msg.payload.d.voltage));\ncontext.set('max',Math.max(max,msg.payload.d.voltage));\n\nmsg.payload=msg.payload.d.voltage+\":\"+msg.zscore+\":\"+min+\":\"+max;\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 201,
+        "y": 376,
+        "wires": [
+            [
+                "e83a92ea.4f1b58",
+                "f3d3cc26.b7fa1"
+            ]
+        ]
+    },
+    {
+        "id": "e83a92ea.4f1b58",
+        "type": "function",
+        "z": "c799ff67.bd4e4",
+        "name": "alert on threshold",
+        "func": "if (Math.abs(msg.zscore)>0.5) {\n    msg.payload=\"ALERT ALERT ALERT!!!!!\";\n    return msg;\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 466,
+        "y": 373,
+        "wires": [
+            [
+                "40acda13.1ede94",
+                "542a2824.8f2668"
+            ]
+        ]
+    },
+    {
+        "id": "f0ad34f5.7e68",
+        "type": "ui_chart",
+        "z": "c799ff67.bd4e4",
+        "name": "",
+        "group": "9f1f2a10.5552f",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "voltage",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "ymin": "200",
+        "ymax": "300",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "x": 836.5,
+        "y": 60.5,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "1abae046.e26328",
+        "type": "function",
+        "z": "c799ff67.bd4e4",
+        "name": "Prepare for Visualization",
+        "func": "msg.payload=msg.payload.d.voltage;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 627.5,
+        "y": 59.75,
+        "wires": [
+            [
+                "f0ad34f5.7e68"
+            ]
+        ]
+    },
+    {
+        "id": "5bce45d0.3ce62c",
+        "type": "ui_chart",
+        "z": "c799ff67.bd4e4",
+        "name": "",
+        "group": "9f1f2a10.5552f",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "zscore",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "x": 839.5,
+        "y": 312.5,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "f3d3cc26.b7fa1",
+        "type": "function",
+        "z": "c799ff67.bd4e4",
+        "name": "Prepare for Visualization",
+        "func": "msg.payload=msg.zscore;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 487,
+        "y": 313,
+        "wires": [
+            [
+                "5bce45d0.3ce62c"
+            ]
+        ]
+    },
+    {
+        "id": "542a2824.8f2668",
+        "type": "ui_text_input",
+        "z": "c799ff67.bd4e4",
+        "name": "",
+        "label": "Alert Status",
+        "group": "9f1f2a10.5552f",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "",
+        "x": 817.5,
+        "y": 374.5,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "eb881224.dc73",
+        "type": "delay",
+        "z": "c799ff67.bd4e4",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 653.5,
+        "y": 507.75,
+        "wires": [
+            [
+                "542a2824.8f2668"
+            ]
+        ]
+    },
+    {
+        "id": "40acda13.1ede94",
+        "type": "function",
+        "z": "c799ff67.bd4e4",
+        "name": "reset message",
+        "func": "msg.payload = \"\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 446.5,
+        "y": 507.75,
+        "wires": [
+            [
+                "eb881224.dc73"
+            ]
+        ]
+    }
+]
