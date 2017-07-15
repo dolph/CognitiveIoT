@@ -11,7 +11,7 @@ This was originally part of a larger tutorial which can be found [HERE](https://
 
 # Installation/Deployment Steps
 
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/rattboi/CognitiveIoT.git)
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/ibm/CognitiveIoT.git)
 
 Follow the fast-track recipe instructions [HERE](https://developer.ibm.com/recipes/tutorials/realtime-anomaly-detection-on-the-iot-edge-using-nodered-and-moving-zscore/) first, using the above "Deploy to Bluemix" button to automate a majority of the deployment. Afterward, you need to wire up the Watson IoT Platform to your simulated device.
 
@@ -62,7 +62,7 @@ For alerting, it you could run a Node-RED instance from BlueMix like above, and 
 
 Another option would be to run the dashboard on your edge devices themselves, and check per-device. This is probably less than optimal though.
 
-# Architecture
+# Architectural Diagram
 
 ![Architectural Diagram](arch_diagram.png "Architectural Diagram")
 
