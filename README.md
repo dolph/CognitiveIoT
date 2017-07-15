@@ -1,19 +1,19 @@
 # Overview
 
-This repository contains samples for a fast-track deployment of the Edge part of an IoT system based on NodeRED. It is part of an overall tutorial which can be found [HERE](https://ibm.biz/CognitiveIoT). This repository is used in the fast-track recipe which can be found [HERE](https://developer.ibm.com/recipes/tutorials/realtime-anomaly-detection-on-the-iot-edge-using-nodered-and-moving-zscore/). Those are the steps:
+This repository contains samples for a fast-track deployment of the Edge part of an IoT system based on NodeRED. 
 
-* Deploying NodeRED to the cloud
-* Starting the test data generator
-* Stream data into a NoSQL database
-* Analyze it using ApacheSparkSQL
-* Update the model on the Edge
-* Finally, implement an Edge based Anomaly Detector using moving zscore
+This was originally part of a larger tutorial which can be found [HERE](https://ibm.biz/CognitiveIoT). This repository is used in the fast-track recipe which can be found [HERE](https://developer.ibm.com/recipes/tutorials/realtime-anomaly-detection-on-the-iot-edge-using-nodered-and-moving-zscore/). These are the steps:
+
+* Deploy NodeRED + AnomalyDetector app to the cloud
+* Configure Watson IoT Componenets
+* Stream data into Watson IoT Platform
+* Analyze Edge-based Anomaly Detector using moving zscore in NodeRED Dashboard
 
 # Installation/Deployment Steps
 
 [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/rattboi/CognitiveIoT.git)
 
-Follow the fast-track recipe instructions [HERE](https://developer.ibm.com/recipes/tutorials/realtime-anomaly-detection-on-the-iot-edge-using-nodered-and-moving-zscore/) first, using the above "Deploy to Bluemix" button to automate a majority of the deployment. Afterward, you need to wire up the Watson IoT platform to your simulated device.
+Follow the fast-track recipe instructions [HERE](https://developer.ibm.com/recipes/tutorials/realtime-anomaly-detection-on-the-iot-edge-using-nodered-and-moving-zscore/) first, using the above "Deploy to Bluemix" button to automate a majority of the deployment. Afterward, you need to wire up the Watson IoT Platform to your simulated device.
 
 ## Setting up Watson IoT Components
 
@@ -52,17 +52,20 @@ After deployment, you can see the dashboard in Node-RED by navigating in the Nod
 
 The Node-RED dashboard shows a 1-minute visualization on your simulated Voltage sensor, as well as the moving Z-score. Any large jumps in Z-score are also reported in under "Alert Status".
 
-# Accessing/running the scenario
-
-# End-to-end testing of the scenario
-
-# Troubleshooting
-
 # Performance/production considerations
+
+In a production environment, you would run Node-RED on each of your edge devices, and wire each to Watson IoT Platform. There, you could monitor and manage all of them from a central dashboard.
 
 # Extension considerations
 
+For alerting, it you could run a Node-RED instance from BlueMix like above, and change only a few things to expand the Node-RED dashboard to show your other devices. 
+
+Another option would be to run the dashboard on your edge devices themselves, and check per-device. This is probably less than optimal though.
+
 # Architecture
+
+![Architectural Diagram](arch_diagram.png "Architectural Diagram")
+
 
 ### License
 -----------------------
