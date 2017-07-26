@@ -161,7 +161,6 @@ Now that your device type is created, you will create a device.
 4) You will now have a view of details about your VoltageSensor01 device. Scroll down to "Recent Events" and you should see voltage events occurring continuously. Under "Sensor Information", you can see the most recent data being received, including voltage, frequency, count, and timestamp ('ts'). Click the 'x' to the upper-right to close this view.
 
 5) On the upper-left, click the menu item called "Boards".
-![](images/images/board-icon.png)
 <p align="center">
    <img width="100" height="50" src="images/board-icon.png">
  </p>
