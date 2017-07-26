@@ -114,7 +114,7 @@ Wait for some time until you observe a z-score below -0.5 and you’ll see that 
 
 There are a few more steps required to wire up your Node-RED application to Watson IoT Platform. This gives you a dashboard that shows the real-time values of your simulated sensor, as well as shows connectivity over time and values over time.
 
-### Setting up the RemoteDevice Device Type in Watson IoT Platform
+## Setting up the RemoteDevice Device Type in Watson IoT Platform
 
 1) Go to the menu in Bluemix console
 
@@ -130,7 +130,7 @@ There are a few more steps required to wire up your Node-RED application to Wats
 
 7) On the WIoT page, Click the microchip icon on the left-hand side. It is labeled "Devices"
  <p align="center">
-    <img width="40" height="40" src="images/microchipicon.png">
+    <img width="40" height="40" src="images/Microchipicon.png">
   </p>
 
 8) Click the "+ Add Device" button on the right side.
@@ -161,8 +161,9 @@ Now that your device type is created, you will create a device.
 4) You will now have a view of details about your VoltageSensor01 device. Scroll down to "Recent Events" and you should see voltage events occurring continuously. Under "Sensor Information", you can see the most recent data being received, including voltage, frequency, count, and timestamp ('ts'). Click the 'x' to the upper-right to close this view.
 
 5) On the upper-left, click the menu item called "Boards".
+![](images/images/board-icon.png)
 <p align="center">
-   <img width="50" height="50" src="images/board-icon.png">
+   <img width="50" height="100" src="images/board-icon.png">
  </p>
 
 6) Click the "Device-Centric Analytics" board. You'll now see cards representing much of the same info we saw in the device details. However, this view is a dashboard to easily allow seeing multiple devices at the same time, and you could create additional cards to display further analytics.
