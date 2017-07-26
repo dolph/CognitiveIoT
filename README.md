@@ -163,7 +163,7 @@ Now that your device type is created, you will create a device.
 5) On the upper-left, click the menu item called "Boards".
 ![](images/images/board-icon.png)
 <p align="center">
-   <img width="50" height="100" src="images/board-icon.png">
+   <img width="100" height="50" src="images/board-icon.png">
  </p>
 
 6) Click the "Device-Centric Analytics" board. You'll now see cards representing much of the same info we saw in the device details. However, this view is a dashboard to easily allow seeing multiple devices at the same time, and you could create additional cards to display further analytics.
