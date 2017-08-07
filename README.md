@@ -39,7 +39,7 @@ One can use the sensors to monitor the washing machine for any abnormalities for
 These are high-level steps:
 
 * Deploy NodeRED + AnomalyDetector app to the cloud
-* Configure Watson IoT Componenets
+* Configure Watson IoT Components
 * Stream data into Watson IoT Platform
 * Analyze Edge-based Anomaly Detector using moving zscore in NodeRED Dashboard
 
@@ -87,7 +87,7 @@ So let's walk you through each element:
 
 6. In order to achieve this we need to shift and shuffle the values a bit
 
-7. Now we are at the heart of the system. This JavaScript function will actually calculate the moving z-score for us. Since this function is described in very much detail in this tutorial we’ll skip it here for now.
+7. Now we are at the heart of the system. This JavaScript function will actually calculate the moving z-score for us.
 
 8. Of course we want to plot the moving z-score as well – in parallel to the voltage in order to really understand what’s going on
 
