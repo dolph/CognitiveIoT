@@ -1,46 +1,47 @@
 # Creating a Cognitive IOT Application that Monitors Household Devices
 
-This Cognitive Journey demonstrates how to build a Cognitive IoT application. In cognitive IoT solutions, machine learning takes place in an edge computing architecture. Note that Edge computing means that you push computing away from the cloud or data center out towards the sensors. Computations happens on the edge gateway near the sensors and actors (or even closer on a microcontroller between the gateway and the sensors and actors). Let's use a simple scenario for illustration. Assume that you have a smart garden that uses a moisture sensor to decide when it is time to water your plants. It would use a stepper motor as an actor to open and close the valve of the watering hose.  In this journey, a developer used the cloud to detect anomalies in electric current. When electric current became unstable, a command was sent back to the device to shut off an unstable motor. The developer recognized that the latency was too high and the stability of the internet connection is too low. So the developer decides to implement analysis on the edge component; hence bypassing the cloud.
+This Cognitive Journey demonstrates how to build a Cognitive IoT application. In cognitive IoT solutions, machine learning takes place in an edge computing architecture. Note that Edge computing means that you push computing away from the cloud or data center out towards the sensors. Computations happens on the edge gateway (e.g. Simulated Raspberry Pie in this scenario) near the sensors and actors. Let's use a simple scenario for illustration. Assume that you have a Washing Machine with 3 sensors.
+* Fluid temperature
+* Hardness of H2O
+* Speed of the motor
+
+One can use the sensors to monitor the washing machine for any abnormalities for these specific parts of the machine.  When any of these become unstable, information is triggered to perform an action and to record for later analytics processing.
 
 ## Application Workflow Diagram
 
-![Architectural Diagram](arch_diagram.png "Architectural Diagram")
+![Architectural Diagram](images/arch-diagram.png "Architectural Diagram")
 
 ## Flow
-1. The heart of every IOT solution is the sensors and actors. We sense the environment, make (cognitive) decisions, and act using actors.  
-2. The Node-RED Edge ....
-3. The Edge Model ....
-4. The Watson IOT Platform....
-5. The Node-READ Dashboard....\
 
-These are the steps:
+1. *Sensors*: The heart of every IOT solution is the sensors and actors. We sense the environment, make (cognitive) decisions, and act using actors. In the washing machine use case; the 3 sensors are 1) fluid temperature 2) hardness of H2O 3) Speed of the motor.  These sensors would be in the washing machine.
+2. *Node-RED Edge*: edge means "it's near the device" which one manages; in this case that is the simulated Raspberry Pie; therefore it is called Node Red on the edge. Imagine the Raspberry Pie is attached to the washing machine. Data is flowing constantly from the sensors to the Raspberry Pie. The Node Red Edge (or Raspberry Pie) is hooked up to the Internet by ethernet and is streaming data to the Watson IoT Platform.
+3. *Watson IoT Platform*: is only using the MQTT Message broker. It publishes data back to the Node Red Edge ( in a real world case, if it detects an anomaly,  it would send a message back to the machine to deactivate its motor)
+4. *Node-RED Cloud*: There is a second Node-RED Cloud and it is subscribing to the data coming from the IoT Platform.  That data is then sent to Cloudant so batch analytics can be performed later.
+5. *Cloudant*: A repository that is used for batch analytics processing to identify trends.
 
-* Deploy NodeRED + AnomalyDetector app to the cloud
-* Configure Watson IoT Componenets
-* Stream data into Watson IoT Platform
-* Analyze Edge-based Anomaly Detector using moving zscore in NodeRED Dashboard
 
 ## Included Components
 * [Node-Red Edge](https://flows.nodered.org/node/node-red-node-watson) Node-RED is a flow-based programming tool.
 * [Watson IOT Platform](https://developer.ibm.com/iotplatform/)  Tools and services you need to connect, manage, analyze and secure IoT devices.
-* [IBM Data Science Experience](https://datascience.ibm.com/) Supports the the data scientist community to learn, create, and collaborate.
 * [Cloudant](https://console.bluemix.net/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) IBM® Cloudant® is a managed NoSQL JSON database service
 
 
 
 ## Featured Technologies
-* Apache Spark
-* Jupyter Notebooks
 * MQTT Message Broker
 * Cloud
 * IoT
 * Node.js
 
-## Prerequisites
-* Bluemix account
-* A Data Science Experience account
 
 # Steps
+
+These are high-level steps:
+
+* Deploy NodeRED + AnomalyDetector app to the cloud
+* Configure Watson IoT Componenets
+* Stream data into Watson IoT Platform
+* Analyze Edge-based Anomaly Detector using moving zscore in NodeRED Dashboard
 
 ## Deploying the Application to Bluemix
 
