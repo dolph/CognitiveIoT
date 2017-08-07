@@ -117,6 +117,8 @@ There are a few more steps required to wire up your Node-RED application to Wats
 
 ## Setting up the RemoteDevice Device Type in Watson IoT Platform
 
+Each device connected to the IBM Watson IoT Platform is associated with a device type. Device types are intended to be groups of devices which share common characteristics. So in order to add devices in IBM Watson IoT Platform, one need to create a device type. What you are actually doing is registering a device in the IBM Watson IoT Platform.
+
 1) Go to the menu in Bluemix console
 
 2) Select Apps
@@ -151,7 +153,7 @@ There are a few more steps required to wire up your Node-RED application to Wats
 
 ## Setting up the VoltageSensor01 Device in Watson IoT Platform
 
-Now that your device type is created, you will create a device.
+Now that your device type is created, you will add the device to the IoT Platform. A device can be defined that has a connection to the internet and has data it wants to get into the cloud. And devices can accept commands from applications as well. You need to add the device in IBM Watson IoT Platform Organization before connecting it to the IoT.
 
 1) Select "RemoteDevice" in the dropdown under "Add Device", and click the "Next" button.
 
