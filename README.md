@@ -183,7 +183,7 @@ For alerting, it you could run a Node-RED instance from BlueMix like above, and 
 
 Another option would be to run the dashboard on your edge devices themselves, and check per-device. This is probably less than optimal though.
 
-**Note:** This journey was originally part of a larger tutorial which can be found [HERE](https://ibm.biz/CognitiveIoT).
+**Note:** This journey was originally part of a larger tutorial which can be found [HERE](https://developer.ibm.com/code/patterns/detect-voltage-anomalies-in-household-iot-devices/).
 
 ### License
 -----------------------
