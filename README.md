@@ -85,13 +85,13 @@ So let's walk you through each element:
 
 5. In addition we want to create a little dashboard to monitor the voltage sensor values
 
-6. In order to achieve this we need to shift and shuffle the values a bit
+6. The voltage dashboard displays the voltage data. In order to achieve this we need to extract the voltage value from the input message
 
 7. Now we are at the heart of the system. This JavaScript function will actually calculate the moving z-score for us.
 
 8. Of course we want to plot the moving z-score as well – in parallel to the voltage in order to really understand what’s going on
 
-9. Again we need to do some shifting and shuffling as a preparation
+9. Again we need to extract the z-score from the input message
 
 10. Now we generate an alert messages in case the z-score drops below -0.5 which means some major fluctuation has been taken place recently
 
