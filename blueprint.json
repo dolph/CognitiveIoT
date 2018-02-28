@@ -1,16 +1,17 @@
 {
-  "name": "Detect voltage anomalies in household IoT devices",
-  "description": "Use Node-RED and Watson IoT to build an app that detects anomalies in sensor data",
-  "thumbnailURL": "blueprint/thumbnail.svg",
   "appIconURL": "blueprint/appicon.svg",
-  "previewURLs": [],
-  "type": "WEB",
-  "tags": [
-    "cli",
-    "node",
-    "watson",
-    "appservice"
-  ],
+  "description": "Use Node-RED and Watson IoT to build an app that detects anomalies in sensor data",
+  "email": "cloud@us.ibm.com",
+  "generatorOptions": {
+    "generator-git-starterkit-credentials-builder": {
+      "scope": "@arf"
+    },
+    "generator-ibm-cloud-enablement": {},
+    "generator-ibm-service-enablement": {},
+    "generator-starterkit-content-downloader": {
+      "scope": "@arf"
+    }
+  },
   "generators": {
     "node": [
       "generator-starterkit-content-downloader",
@@ -19,21 +20,17 @@
       "generator-git-starterkit-credentials-builder"
     ]
   },
-  "generatorOptions": {
-    "generator-starterkit-content-downloader": {
-      "scope": "@arf"
-    },
-    "generator-ibm-cloud-enablement": {},
-    "generator-ibm-service-enablement": {},
-    "generator-git-starterkit-credentials-builder": {
-      "scope": "@arf"
-    }
-  },
-  "requiredCapabilities": [
+  "name": "Detect voltage anomalies in household IoT devices",
+  "previewURLs": [],
+  "requiredCapabilities": [],
+  "requiredCapabilitiesURLs": {},
+  "servicePlans": {},
+  "tags": [
+    "cli",
+    "node",
+    "watson",
+    "appservice"
   ],
-  "requiredCapabilitiesURLs": {
-  },
-  "servicePlans": {
-  },
-  "email": "cloud@us.ibm.com"
+  "thumbnailURL": "blueprint/thumbnail.svg",
+  "type": "WEB"
 }
