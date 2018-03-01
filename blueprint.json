@@ -4,12 +4,18 @@
   "email": "cloud@us.ibm.com",
   "generatorOptions": {
     "generator-git-starterkit-credentials-builder": {
-      "scope": "@arf"
+      "scope": "@arf",
+      "version": "0.0.5"
     },
-    "generator-ibm-cloud-enablement": {},
-    "generator-ibm-service-enablement": {},
+    "generator-ibm-cloud-enablement": {
+      "version": "0.8.9"
+    },
+    "generator-ibm-service-enablement": {
+      "version": "0.8.1"
+    },
     "generator-starterkit-content-downloader": {
-      "scope": "@arf"
+      "scope": "@arf",
+      "version": "0.0.10"
     }
   },
   "generators": {
