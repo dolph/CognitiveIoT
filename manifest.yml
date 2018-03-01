@@ -13,3 +13,7 @@ applications:
   memory: 512M
   instances: 1
   disk_quota: 1024M
+  buildpack: sdk-for-nodejs
+  command: npm start
+  random-route: true
+  timeout: 180
