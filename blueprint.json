@@ -23,10 +23,10 @@
   },
   "generators": {
     "node": [
-      "generator-git-starterkit-credentials-builder",
+      "generator-starterkit-content-downloader",
       "generator-ibm-cloud-enablement",
       "generator-ibm-service-enablement",
-      "generator-starterkit-content-downloader"
+      "generator-git-starterkit-credentials-builder"
     ]
   },
   "name": "Detect voltage anomalies in household IoT devices",
