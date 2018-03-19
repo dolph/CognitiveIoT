@@ -32,10 +32,7 @@
   "requiredCapabilitiesURLs": {},
   "servicePlans": {},
   "tags": [
-    "cli",
-    "node",
-    "watson",
-    "appservice"
+    "devex"
   ],
   "thumbnailURL": "blueprint/thumbnail.svg",
   "type": "WEB"
