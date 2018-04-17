@@ -51,7 +51,7 @@ Clicking on the button will automatically deploy a NodeRED data flow tool acting
 
 The `Deploy to IBM Cloud` button automates a majority of the deployment. Afterward, you need to wire up the Watson IoT Platform to your simulated device.
 
-[![Deploy to IBM Cloud](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/ibm/CognitiveIoT.git)
+[![](https://raw.githubusercontent.com/IBM/manage-control-device-node-red/master/images/deploy-btn.PNG)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM/CognitiveIoT)
 
 
 1. We can see that the app is ready to be deployed, and we need to ensure that the App name, region, Organization, Space is valid before pressing 'Deploy'.

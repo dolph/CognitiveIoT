@@ -39,6 +39,7 @@
     "cfenv":"~1.0.0",
     "feedparser":"~0.19.2",
     "redis":"~0.10.1",
+    "metrics-tracker-client": "*",
     "node-red-bluemix-nodes":"0.x",
     "node-red-node-cf-cloudant":"0.x",
     "node-red-contrib-ibmpush":"0.x",
