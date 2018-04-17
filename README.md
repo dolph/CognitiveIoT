@@ -111,7 +111,7 @@ When you click on it, you will observe two time series charts, one for voltage a
 Wait for some time until you observe a z-score below -0.5 and you’ll see that an alert message is being generated. Of course you can also trigger something more important like initiate an emergency shutdown of the system or raise an alert, either by sending an email/SMS from the Edge directly using a NodeRED node (see twilio or email for this) or you can also send the alert upstream to the cloud using MQTT. The latter would be a perfect example on how Edge analytics can reduce the amount of data transferred to the cloud by adding intelligence to the Edge gateway device:
 ![](images/dashboardalert.png)
 
-## Setting up your Bluemix Application with the Watson IoT Components
+## Setting up your IBM Cloud Application with the Watson IoT Components
 
 There are a few more steps required to wire up your Node-RED application to Watson IoT Platform. This gives you a dashboard that shows the real-time values of your simulated sensor, as well as shows connectivity over time and values over time.
 
@@ -119,7 +119,7 @@ There are a few more steps required to wire up your Node-RED application to Wats
 
 Each device connected to the IBM Watson IoT Platform is associated with a device type. Device types are intended to be groups of devices which share common characteristics. So in order to add devices in IBM Watson IoT Platform, one need to create a device type. What you are actually doing is registering a device in the IBM Watson IoT Platform.
 
-1) Go to the menu in Bluemix console
+1) Go to the menu in IBM Cloud console
 
 2) Select Apps
 
