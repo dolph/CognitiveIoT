@@ -1,6 +1,6 @@
-# Creating a Cognitive IOT Application that Monitors Household Devices
+# [Creating a Cognitive IOT Application that Monitors Household Devices](https://developer.ibm.com/code/patterns/detect-voltage-anomalies-in-household-iot-devices/)
 
-This Cognitive Journey demonstrates how to build a Cognitive IoT application. In cognitive IoT solutions, machine learning takes place in an edge computing architecture. Note that Edge computing means that you push computing away from the cloud or data center out towards the sensors. Computations happens on the edge gateway (e.g. Simulated Raspberry Pie in this scenario) near the sensors and actors. Let's use a simple scenario for illustration. Assume that you have a Washing Machine with 3 sensors.
+This Cognitive IBM Pattern demonstrates how to build a Cognitive IoT application. In cognitive IoT solutions, machine learning takes place in an edge computing architecture. Note that Edge computing means that you push computing away from the cloud or data center out towards the sensors. Computations happens on the edge gateway (e.g. Simulated Raspberry Pie in this scenario) near the sensors and actors. Let's use a simple scenario for illustration. Assume that you have a Washing Machine with 3 sensors.
 * Fluid temperature
 * Hardness of H2O
 * Speed of the motor
@@ -43,15 +43,15 @@ These are high-level steps:
 * Stream data into Watson IoT Platform
 * Analyze Edge-based Anomaly Detector using moving zscore in NodeRED Dashboard
 
-## Deploying the Application to Bluemix
+## Deploying the Application to IBM Cloud
 
-A) **Using the Deploy to Bluemix button**
+A) **Using the Deploy to IBM Cloud (Bluemix) button**
 
 Clicking on the button will automatically deploy a NodeRED data flow tool acting as a device simulator in the IBM Cloud. It also creates a pre-configured "edge" implementation of the zScore algorithm.
 
-The `Deploy to Bluemix` button automates a majority of the deployment. Afterward, you need to wire up the Watson IoT Platform to your simulated device.
+The `Deploy to IBM Cloud` button automates a majority of the deployment. Afterward, you need to wire up the Watson IoT Platform to your simulated device.
 
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/ibm/CognitiveIoT.git)
+[![Deploy to IBM Cloud](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/ibm/CognitiveIoT.git)
 
 
 1. We can see that the app is ready to be deployed, and we need to ensure that the App name, region, Organization, Space is valid before pressing 'Deploy'.
@@ -63,12 +63,12 @@ The `Deploy to Bluemix` button automates a majority of the deployment. Afterward
 3. You should see two stages pass successfully once your Deploy Stage completes
 ![](images/deploy-to-bm3.png)
 
-4. To see the app and services created and configured for this journey, use the Bluemix dashboard. The app is named `CognitiveIoT-20170724231917178` and it is running the following services:
+4. To see the app and services created and configured for this journey, use the IBM Cloud dashboard. The app is named `CognitiveIoT-20170724231917178` and it is running the following services:
 
   * [Cloudant NoSQL DB](https://console.bluemix.net/catalog/services/cloudant-nosql-db?env_id=ibm:yp:us-south)
   * [cognitive-iot-iotf-service](https://www.ibm.com/internet-of-things/platform/watson-iot-platform/)
 
-B) **Go into Bluemix** and click on the url route associated with your application. you will be taken to the NodeRED flow editor where you can see the already deployed and running application.
+B) **Go into IBM Cloud** and click on the url route associated with your application. you will be taken to the NodeRED flow editor where you can see the already deployed and running application.
 ![](images/runtheapp.png)
 
 Please have a look; you should see the following:
@@ -179,11 +179,23 @@ In a production environment, you would run Node-RED on each of your edge devices
 
 # Extension considerations
 
-For alerting, it you could run a Node-RED instance from BlueMix like above, and change only a few things to expand the Node-RED dashboard to show your other devices.
+For alerting, it you could run a Node-RED instance from IBM Cloud like above, and change only a few things to expand the Node-RED dashboard to show your other devices.
 
 Another option would be to run the dashboard on your edge devices themselves, and check per-device. This is probably less than optimal though.
 
 **Note:** This journey was originally part of a larger tutorial which can be found [HERE](https://developer.ibm.com/code/patterns/detect-voltage-anomalies-in-household-iot-devices/).
+
+## <h2>Learn more</h2>
+<ul>
+<li><strong>Artificial Intelligence Code Patterns</strong>: Enjoyed this Code Pattern? Check out our other <a href="https://developer.ibm.com/code/technologies/artificial-intelligence/" rel="nofollow">AI Code Patterns</a>.</li>
+<li><strong>Data Analytics Code Patterns</strong>: Enjoyed this Code Pattern? Check out our other <a href="https://developer.ibm.com/code/technologies/data-science/" rel="nofollow">Data Analytics Code Patterns</a></li>
+<li><strong>AI and Data Code Pattern Playlist</strong>: Bookmark our <a href="https://www.youtube.com/playlist?list=PLzUbsvIyrNfknNewObx5N7uGZ5FKH0Fde" rel="nofollow">playlist</a> with all of our Code Pattern videos</li>
+<li><strong>With Watson</strong>: Want to take your Watson app to the next level? Looking to utilize Watson Brand assets? <a href="https://www.ibm.com/watson/with-watson/" rel="nofollow">Join the With Watson program</a> to leverage exclusive brand, marketing, and tech resources to amplify and accelerate your Watson embedded commercial solution.</li>
+<li><strong>Data Science Experience</strong>: Master the art of data science with IBM's <a href="https://datascience.ibm.com/" rel="nofollow">Data Science Experience</a></li>
+<li><strong>PowerAI</strong>: Get started or get scaling, faster, with a software distribution for machine learning running on the Enterprise Platform for AI: <a href="https://www.ibm.com/ms-en/marketplace/deep-learning-platform" rel="nofollow">IBM Power Systems</a></li>
+<li><strong>Spark on IBM Cloud</strong>: Need a Spark cluster? Create up to 30 Spark executors on IBM Cloud with our <a href="https://console.bluemix.net/catalog/services/apache-spark" rel="nofollow">Spark service</a></li>
+<li><strong>Kubernetes on IBM Cloud</strong>: Deliver your apps with the combined the power of <a href="https://www.ibm.com/cloud-computing/bluemix/containers" rel="nofollow">Kubernetes and Docker on IBM Cloud</a></li>
+</ul>
 
 ### License
 -----------------------
