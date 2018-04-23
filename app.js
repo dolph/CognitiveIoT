@@ -17,6 +17,7 @@
 
 
 "use strict";  /* always for Node.JS, never global in the browser */
+require('metrics-tracker-client').track();
 
 // Set the modules
 var http    = require('http'),
@@ -71,7 +72,7 @@ var settings = {
     serialReconnectTime: 4000,
     debugMaxLength: 1000,
 
-    // Basic flow protection, password is password using bcrypt algorithim 
+    // Basic flow protection, password is password using bcrypt algorithim
     /*adminAuth: {
         type: "credentials",
         users: [{
