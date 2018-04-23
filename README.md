@@ -47,13 +47,13 @@ These are high-level steps:
 
 ## Deploying the Application to IBM Cloud
 
-A) **Using the Deploy to IBM Cloud (Bluemix) button**
+A) **Using the Deploy to IBM Cloud button**
 
 Clicking on the button will automatically deploy a NodeRED data flow tool acting as a device simulator in the IBM Cloud. It also creates a pre-configured "edge" implementation of the zScore algorithm.
 
 The `Deploy to IBM Cloud` button automates a majority of the deployment. Afterward, you need to wire up the Watson IoT Platform to your simulated device.
 
-[![](https://raw.githubusercontent.com/IBM/manage-control-device-node-red/master/images/deploy-btn.PNG)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM/CognitiveIoT)
+[![](images/deploy_btm_cloud.png)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM/CognitiveIoT)
 
 
 1. We can see that the app is ready to be deployed, and we need to ensure that the App name, region, Organization, Space is valid before pressing 'Deploy'.
