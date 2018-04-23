@@ -18,18 +18,17 @@ One can use the sensors to monitor the washing machine for any abnormalities for
 
 ## Flow
 
-1. *Sensors*: The heart of every IOT solution is the sensors and actors. We sense the environment, make (cognitive) decisions, and act using actors. In the washing machine use case; the 3 sensors are 1) fluid temperature 2) hardness of H2O 3) Speed of the motor.  These sensors would be in the washing machine.
-2. [*Node-RED Edge (Node-RED running on your device)*](https://github.com/IBM/CognitiveIoT/tree/master/node-red): edge means "it's near the device" which one manages; in this case that is the simulated Raspberry Pi; therefore it is called Node Red on the edge. Imagine the Raspberry Pi is attached to the washing machine. Data is flowing constantly from the sensors to the Raspberry Pi. The Node Red Edge (or Raspberry Pi) is hooked up to the Internet by ethernet and is streaming data to the Watson IoT Platform.
-3. *Edge model*: It's a built-in piece of code that filters and transforms values transitioned to the IoT Platform
-4. *Watson IoT Platform*: is using the MQTT Message broker. It publishes data back to the Node Red Edge (in a real world case, if it detects an anomaly, it would send a message back to the machine to deactivate its motor)
-5. [*Node-RED IBM Cloud (YOUR_APP_NAME.mybluemix.net)*](https://github.com/IBM/CognitiveIoT/tree/master/defaults): There is a second Node-RED on IBM Cloud and it is subscribing to the data coming from the IoT Platform.  ~~That data is then sent to Cloudant so batch analytics can be performed later.~~<br>
-6. ~~*Cloudant*: A repository that is used for batch analytics processing to identify trends.~~ <i>Cloudant not Implemented here.</i>
+1. **Sensors**: The heart of every IOT solution is the sensors and actors. We sense the environment, make (cognitive) decisions, and act using actors. In the washing machine use case; the 3 sensors are 1) fluid temperature 2) hardness of H2O 3) Speed of the motor.  These sensors would be in the washing machine.
+2. [**Node-RED Edge (Node-RED running on your device)**](https://github.com/IBM/CognitiveIoT/tree/master/node-red): edge means "it's near the device" which one manages; in this case that is the simulated Raspberry Pi; therefore it is called Node Red on the edge. Imagine the Raspberry Pi is attached to the washing machine. Data is flowing constantly from the sensors to the Raspberry Pi. The Node Red Edge (or Raspberry Pi) is hooked up to the Internet by ethernet and is streaming data to the Watson IoT Platform.
+3. **Edge model**: It's a built-in piece of code that filters and transforms values transitioned to the IoT Platform
+4. **Watson IoT Platform**: is using the MQTT Message broker. It publishes data back to the Node Red Edge (in a real world case, if it detects an anomaly, it would send a message back to the machine to deactivate its motor)
+5. [**Node-RED IBM Cloud (YOUR_APP_NAME.mybluemix.net)**](https://github.com/IBM/CognitiveIoT/tree/master/defaults): There is a second Node-RED on IBM Cloud and it is subscribing to the data coming from the IoT Platform.  ~~That data is then sent to Cloudant so batch analytics can be performed later.~~<br>
+6. ~~**Cloudant**: A repository that is used for batch analytics processing to identify trends.~~ <i>**Cloudant not Implemented here.**</i>
 
 
 ## Included Components
 * [Node-Red Edge](https://flows.nodered.org/node/node-red-node-watson) Node-RED is a flow-based programming tool.
 * [Watson IOT Platform](https://developer.ibm.com/iotplatform/)  Tools and services you need to connect, manage, analyze and secure IoT devices.
-* [Cloudant](https://console.bluemix.net/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) IBM® Cloudant® is a managed NoSQL JSON database service
 
 
 
@@ -71,7 +70,6 @@ The `Deploy to IBM Cloud` button automates a majority of the deployment. Afterwa
 
 4. To see the app and services created and configured for this journey, use the IBM Cloud dashboard. The app is named `CognitiveIoT-20170724231917178` and it is running the following services:
 
-  * [Cloudant NoSQL DB](https://console.bluemix.net/catalog/services/cloudant-nosql-db?env_id=ibm:yp:us-south)
   * [cognitive-iot-iotf-service](https://www.ibm.com/internet-of-things/platform/watson-iot-platform/)
 
 B) **Go into IBM Cloud** and click on the url route associated with your application. you will be taken to the NodeRED flow editor where you can see the already deployed and running application.
