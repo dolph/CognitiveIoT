@@ -23,6 +23,7 @@ One can use the sensors to monitor the washing machine for any abnormalities for
 3. *Edge model*: It's a built-in piece of code that filters and transforms values transitioned to the IoT Platform
 4. *Watson IoT Platform*: is using the MQTT Message broker. It publishes data back to the Node Red Edge (in a real world case, if it detects an anomaly, it would send a message back to the machine to deactivate its motor)
 5. [*Node-RED IBM Cloud (YOUR_APP_NAME.mybluemix.net)*](https://github.com/IBM/CognitiveIoT/tree/master/defaults): There is a second Node-RED on IBM Cloud and it is subscribing to the data coming from the IoT Platform.  ~~That data is then sent to Cloudant so batch analytics can be performed later.~~
+
 ~~6. *Cloudant*: A repository that is used for batch analytics processing to identify trends.~~ <i>Cloudant not Implemented here.</i>
 
 
